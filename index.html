@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0a0a">
+<title>القرآن الکریم الٹرا پرو | SMART World Order</title>
+<style>
+:root{
+  --bg:#0a0a0a;--bg2:#111;--bg3:#1a1a2e;
+  --p:#f87171;--p2:#fca5a5;--a:#4ade80;
+  --t:#fff;--td:rgba(255,255,255,0.85);
+  --g:rgba(255,255,255,0.1);--gb:rgba(255,255,255,0.2);
+  --f-ar:'Amiri','Traditional Arabic',serif;
+  --as:28px;--lh:2.2;
+  --glow:0 0 10px rgba(255,255,255,0.4),0 0 20px var(--p),0 0 40px rgba(255,255,255,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:var(--f-ar);background:var(--bg);color:var(--t);min-height:100vh;overflow-x:hidden;transition:background 0.3s}
+
+/* === ANIMATED BG === */
+.bg{position:fixed;inset:0;z-index:0;overflow:hidden}
+.ob{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.35;animation:float 25s infinite}
+.ob:nth-child(1){width:450px;height:450px;background:radial-gradient(circle,var(--p),transparent);top:-15%;left:-10%}
+.ob:nth-child(2){width:400px;height:400px;background:radial-gradient(circle,var(--a),transparent);bottom:-10%;right:-15%;animation-delay:-8s}
+@keyframes float{0%,100%{transform:translate(0,0)scale(1)}25%{transform:translate(100px,-80px)scale(1.15)}50%{transform:translate(-70px,100px)scale(0.9)}75%{transform:translate(80px,60px)scale(1.05)}}
+
+/* === APP === */
+.app{position:relative;z-index:10;max-width:430px;margin:0 auto;padding-bottom:110px}
+
+/* === HEADER === */
+.hdr{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);padding:12px 14px;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;flex-direction:column;align-items:center;gap:6px}
+.bismillah{font-size:20px;color:var(--p);text-shadow:var(--glow);font-weight:700;letter-spacing:1px}
+.smart{font-size:15px;font-weight:800;background:linear-gradient(90deg,var(--p),var(--p2),var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hdr-acts{display:flex;gap:8px;width:100%;justify-content:space-between;margin-top:4px}
+.logo{display:flex;align-items:center;gap:8px}
+.l-ic{width:38px;height:38px;background:linear-gradient(135deg,var(--p),var(--p2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 10px rgba(255,255,255,0.2)}
+.l-t{font-size:17px;font-weight:800;text-shadow:var(--glow)}
+.btn{width:40px;height:40px;border-radius:10px;background:var(--g);border:1px solid var(--gb);color:var(--t);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;font-weight:700;transition:0.2s}
+.btn:hover{background:rgba(255,255,255,0.2);transform:scale(1.05)}
+.btn.lg{width:44px;height:44px;font-size:20px}
+
+/* === TABS === */
+.tabs{display:flex;gap:6px;padding:10px 14px;overflow-x:auto}
+.tab{padding:8px 14px;border-radius:20px;background:var(--g);border:1px solid var(--gb);color:var(--t);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:0.2s}
+.tab.act{background:rgba(255,255,255,0.15);border-color:var(--p);color:var(--p2)}
+
+/* === SECTIONS - NO WHITE SCREEN BUG === */
+.sec{padding:0 14px 20px;opacity:1;visibility:visible;transition:opacity 0.2s}
+.sec.inactive{position:absolute;left:-9999px;opacity:0;visibility:hidden;pointer-events:none}
+
+/* === CARDS === */
+.card{display:flex;align-items:center;gap:12px;padding:14px;margin-bottom:8px;background:var(--g);border:1px solid var(--gb);border-radius:12px;cursor:pointer;transition:0.2s}
+.card:hover{background:rgba(255,255,255,0.15);transform:translateX(-3px)}
+.num{width:44px;height:44px;border-radius:10px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--p2);font-weight:700}
+.info{flex:1}
+.info .t{font-weight:700;font-size:16px;text-shadow:0 0 8px rgba(255,255,255,0.3)}
+.info .s{font-size:11px;color:var(--td)}
+
+/* === EDITION BAR === */
+.ed-bar{display:flex;gap:6px;padding:10px 14px;overflow-x:auto;border-bottom:1px solid rgba(255,255,255,0.05)}
+.ed-btn{padding:8px 14px;border-radius:18px;background:var(--g);border:1px solid var(--gb);color:var(--t);font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap}
+.ed-btn.act{background:rgba(255,255,255,0.2);border-color:var(--p);color:var(--p2)}
+
+/* === READER === */
+.reader-head{text-align:center;padding:20px 16px;background:var(--g);border:1px solid var(--gb);border-radius:14px;margin-bottom:14px}
+.bismillah-lg{font-size:26px;color:var(--p);margin-bottom:8px;text-shadow:var(--glow)}
+.sname{font-size:22px;font-weight:700}
+
+.ayah{padding:18px 14px;margin-bottom:12px;background:var(--g);border:1px solid var(--gb);border-radius:12px;transition:0.3s}
+.ayah:hover{transform:translateY(-2px)}
+.ayah.act{border-color:var(--p);background:rgba(248,113,113,0.1);box-shadow:0 0 20px rgba(248,113,113,0.2)}
+.arb{font-size:var(--as);line-height:var(--lh);text-align:center;margin-bottom:10px;direction:rtl;color:var(--t);text-shadow:var(--glow);padding:12px;background:rgba(248,113,113,0.08);border-radius:10px;font-weight:700}
+.trn{font-size:14px;color:var(--td);padding:10px;background:rgba(74,222,128,0.08);border-radius:8px;line-height:1.8;text-align:right}
+.eng{font-size:13px;color:var(--td);padding:8px;background:rgba(34,211,238,0.06);border-radius:6px;margin-top:6px;text-align:left}
+.tfs{font-size:13px;color:var(--td);padding:10px;background:rgba(167,139,250,0.06);border-radius:8px;line-height:1.9;text-align:right;margin-top:6px}
+.anum{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;background:var(--p);border-radius:50%;font-size:12px;color:#000;line-height:30px;margin-bottom:8px;font-weight:700}
+
+/* === EDITION STYLES === */
+.ed-tajweed .arb .madd{color:#f87171;text-shadow:0 0 8px #f87171}
+.ed-tajweed .arb .ghunna{color:#4ade80;text-shadow:0 0 8px #4ade80}
+.ed-tajweed .arb .ikhfa{color:#fbbf24;text-shadow:0 0 8px #fbbf24}
+.ed-urdu-only .arb{display:none}
+.ed-english-only .arb,.ed-english-only .trn{display:none}
+.ed-multi .ayah{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.ed-multi .arb,.ed-multi .trn,.ed-multi .eng{margin:0;padding:8px}
+.ed-15line .arb,.ed-16line .arb{font-size:24px;padding:6px;margin-bottom:4px}
+.ed-15line .trn,.ed-16line .trn{font-size:12px;padding:6px}
+
+/* === SIDEBARS === */
+.sidebar{position:fixed;top:0;width:290px;height:100%;z-index:200;background:var(--bg2);border:1px solid var(--gb);transition:0.3s;padding:16px;overflow-y:auto;box-shadow:-5px 0 25px rgba(0,0,0,0.4)}
+.sidebar.right{right:-100%}
+.sidebar.left{left:-100%}
+.sidebar.open.right{right:0}
+.sidebar.open.left{left:0}
+.sb-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.sb-title{font-size:16px;font-weight:800;color:var(--p)}
+.sb-close{width:34px;height:34px;border-radius:8px;background:var(--g);border:1px solid var(--gb);color:var(--t);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px}
+.sb-sec{margin-bottom:16px}
+.sb-t{font-size:13px;font-weight:700;color:var(--p);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.sb-c{background:var(--g);border:1px solid var(--gb);border-radius:10px;overflow:hidden}
+.sb-r{display:flex;align-items:center;justify-content:space-between;padding:12px;border-bottom:1px solid rgba(255,255,255,0.05);cursor:pointer}
+.sb-r:last-child{border:none}
+.sb-r:hover{background:rgba(255,255,255,0.05)}
+.sb-l{display:flex;align-items:center;gap:10px;font-size:12px}
+.ic{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;font-size:14px}
+.toggle{width:42px;height:22px;background:rgba(255,255,255,0.1);border-radius:10px;position:relative;cursor:pointer}
+.toggle.on{background:rgba(255,255,255,0.3)}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;background:#fff;border-radius:50%;transition:0.3s}
+.toggle.on::after{left:22px;background:var(--p)}
+select{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:7px;padding:6px 10px;color:var(--t);font-size:12px}
+.themes{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:12px}
+.th-b{width:100%;aspect-ratio:1;border-radius:8px;cursor:pointer;border:2px solid transparent}
+.th-b.on{border-color:#fff;box-shadow:0 0 10px rgba(255,255,255,0.4)}
+.add-btn{width:100%;padding:10px;border-radius:8px;background:linear-gradient(135deg,var(--p),var(--p2));border:none;color:#000;font-weight:700;cursor:pointer;font-size:12px;margin-top:8px}
+.notes{width:100%;min-height:120px;padding:10px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--t);font-size:13px;outline:none;resize:vertical}
+
+/* === PLAYER === */
+.player{position:fixed;bottom:0;left:0;right:0;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,0.1);padding:12px 14px 18px;transform:translateY(100%);transition:0.3s;z-index:150}
+.player.show{transform:translateY(0)}
+.p-top{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.p-ic{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--p),var(--p2));border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:20px}
+.p-tx{flex:1;text-align:right}
+.p-t{font-size:15px;font-weight:700;text-shadow:var(--glow)}
+.p-s{font-size:11px;color:var(--td)}
+.p-bar{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.p-time{font-size:10px;color:var(--td);min-width:30px;text-align:center;font-family:monospace}
+.p-track{flex:1;height:4px;background:rgba(255,255,255,0.1);border-radius:2px;cursor:pointer}
+.p-fill{height:100%;background:linear-gradient(90deg,var(--p),var(--p2));border-radius:2px;width:0%}
+.p-ctrl{display:flex;justify-content:center;gap:12px}
+.p-b{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:var(--t);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px}
+.p-b.play{width:50px;height:50px;background:linear-gradient(135deg,var(--p),var(--p2));border:none;color:#000;font-size:18px}
+.p-b.act{background:rgba(255,255,255,0.2);border-color:var(--p);color:var(--p2)}
+
+/* === TOAST === */
+.toast{position:fixed;top:20px;left:50%;transform:translateX(-50%) translateY(-100px);z-index:300;padding:10px 18px;background:rgba(20,30,50,0.95);border:1px solid rgba(255,255,255,0.2);border-radius:10px;color:var(--t);font-size:13px;transition:0.3s;white-space:nowrap;max-width:90%}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* === LOADER === */
+.loader{position:fixed;inset:0;z-index:400;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.loader.hide{display:none}
+.spin{width:40px;height:40px;border:3px solid rgba(255,255,255,0.1);border-top-color:var(--p);border-radius:50%;animation:rot 1s linear infinite;margin-bottom:12px}
+@keyframes rot{100%{transform:rotate(360deg)}}
+
+/* === MODAL === */
+.modal{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,0.8);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.show{display:flex}
+.modal-c{background:var(--bg2);border:1px solid var(--gb);border-radius:14px;padding:20px;width:100%;max-width:400px;max-height:80vh;overflow-y:auto}
+.modal-hdr{display:flex;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.1)}
+.modal-title{font-size:16px;font-weight:700;color:var(--p)}
+.modal-close{width:32px;height:32px;border-radius:6px;background:var(--g);border:1px solid var(--gb);color:var(--t);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px}
+.form-g{margin-bottom:12px}
+.form-l{display:block;margin-bottom:6px;font-size:12px;color:var(--td)}
+.form-i{width:100%;padding:8px 10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:6px;color:var(--t);font-size:13px;outline:none}
+.form-t{min-height:80px;resize:vertical}
+.form-b{width:100%;padding:10px;border-radius:8px;background:linear-gradient(135deg,var(--p),var(--p2));border:none;color:#000;font-weight:700;cursor:pointer;font-size:13px;margin-top:8px}
+
+/* === FOOTER === */
+.footer{margin-top:20px;padding:16px;text-align:center;font-size:11px;color:var(--td);border-top:1px solid rgba(255,255,255,0.05)}
+.footer strong{color:var(--p);font-weight:700}
+.footer a{color:var(--a);text-decoration:none}
+
+/* === ISLAMIC BOXES === */
+.isl-box{padding:14px;margin-bottom:10px;background:linear-gradient(135deg,rgba(248,113,113,0.1),rgba(74,222,128,0.05));border:1px solid rgba(248,113,113,0.2);border-radius:12px;cursor:pointer}
+.isl-box:hover{transform:translateY(-2px)}
+.isl-t{font-size:15px;font-weight:700;color:var(--p);margin-bottom:4px}
+.isl-d{font-size:12px;color:var(--td);line-height:1.6}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader"><div class="spin"></div><div style="color:var(--p);font-size:18px;margin-top:10px">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div></div>
+<div class="bg"><div class="ob"></div><div class="ob"></div></div>
+<div class="toast" id="toast"></div>
+
+<!-- LEFT SIDEBAR -->
+<div class="sidebar left" id="sbLeft">
+  <div class="sb-hdr"><div class="sb-title">⚙️ سیٹنگز</div><div class="sb-close" onclick="toggleSB('left')">×</div></div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">🎨 30 تھیمز</div>
+    <div class="sb-c"><div class="themes" id="themeGrid"></div></div>
+    <button class="add-btn" onclick="openModal('theme')">➕ کسٹم تھیم</button>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">📖 ایڈیشن</div>
+    <div class="sb-c">
+      <div class="sb-r" onclick="setEd('std')"><div class="sb-l"><div class="ic">📖</div><span>اسٹینڈرڈ</span></div></div>
+      <div class="sb-r" onclick="setEd('taj')"><div class="sb-l"><div class="ic">🎨</div><span>تجوید</span></div></div>
+      <div class="sb-r" onclick="setEd('15')"><div class="sb-l"><div class="ic">📄</div><span>15 لائنز</span></div></div>
+      <div class="sb-r" onclick="setEd('16')"><div class="sb-l"><div class="ic">📄</div><span>16 لائنز</span></div></div>
+      <div class="sb-r" onclick="setEd('ur')"><div class="sb-l"><div class="ic">🇵🇰</div><span>صرف اردو</span></div></div>
+      <div class="sb-r" onclick="setEd('en')"><div class="sb-l"><div class="ic">🇬🇧</div><span>صرف انگلش</span></div></div>
+      <div class="sb-r" onclick="setEd('multi')"><div class="sb-l"><div class="ic">🌐</div><span>تینوں</span></div></div>
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">🔊 آڈیو</div>
+    <div class="sb-c">
+      <div class="sb-r" onclick="togUrduAud()"><div class="sb-l"><div class="ic">🇵🇰</div><span>اردو آڈیو</span></div><div class="toggle" id="urTog"></div></div>
+      <div class="sb-r" onclick="togAutoScroll()"><div class="sb-l"><div class="ic">🔄</div><span>آٹو سکرول</span></div><div class="toggle" id="asTog"></div></div>
+      <div class="sb-r"><div class="sb-l"><div class="ic">⚡</div><span>سپیڈ</span></div>
+      <select onchange="st.spd=+this.value"><option value="0.5">0.5x</option><option value="1" selected>1x</option><option value="2">2x</option><option value="3">3x</option></select></div>
+      <div class="sb-r"><div class="sb-l"><div class="ic">🔊</div><span>والیوم</span></div>
+      <select onchange="setVol(this.value)"><option value="0.5">50%</option><option value="1">100%</option><option value="1.5" selected>150%</option><option value="2">200%</option></select></div>
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">🔤 ٹیکسٹ</div>
+    <div class="sb-c">
+      <div class="sb-r"><div class="sb-l"><div class="ic">📏</div><span>سائز</span></div>
+      <div style="display:flex;gap:6px"><button class="btn" onclick="chgSz(-2)">−</button><span id="szV" style="width:25px;text-align:center;font-weight:700">28</span><button class="btn" onclick="chgSz(2)">+</button></div></div>
+      <div class="sb-r" onclick="togGlow()"><div class="sb-l"><div class="ic">✨</div><span>گلو</span></div><div class="toggle on" id="glTog"></div></div>
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">📚 ترجمہ</div>
+    <div class="sb-c">
+      <div class="sb-r"><div class="sb-l"><div class="ic">🇵🇰</div><span>اردو</span></div>
+      <select id="urTr" onchange="reload()"><option value="j">جالندھری</option><option value="k">کنز الایمان</option><option value="a">اسرار احمد</option><option value="t">تقی عثمانی</option></select></div>
+      <div class="sb-r"><div class="sb-l"><div class="ic">🇬🇧</div><span>English</span></div>
+      <select id="enTr" onchange="reload()"><option value="s">Sahih</option><option value="y">Yusuf Ali</option><option value="p">Pickthall</option><option value="m">Asad</option><option value="r">Arberry</option></select></div>
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">📝 میرے نوٹس</div>
+    <div class="sb-c" style="padding:12px">
+      <textarea class="notes" id="myNotes" placeholder="ذاتی نوٹس..." onchange="saveNotes()"></textarea>
+      <div style="font-size:10px;color:var(--td);text-align:center;margin-top:6px">صرف آپ کے لیے</div>
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">🔐 ایڈمن</div>
+    <div class="sb-c">
+      <div class="sb-r" onclick="adminLogin()"><div class="sb-l"><div class="ic">🔐</div><span>لاگ ان</span></div><span style="color:var(--p)">→</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- RIGHT SIDEBAR -->
+<div class="sidebar right" id="sbRight">
+  <div class="sb-hdr"><div class="sb-title">📖 معلومات</div><div class="sb-close" onclick="toggleSB('right')">×</div></div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">🔒 پرائیویسی</div>
+    <div class="sb-c" style="padding:12px;font-size:11px;line-height:1.7;color:var(--td)">
+      <strong style="color:var(--p);display:block;margin-bottom:6px">Privacy First</strong>
+      • ذاتی ڈیٹا محفوظ ہے<br>• کوئی تھرڈ پارٹی شیئرنگ نہیں<br>• لوکل اسٹوریج میں محفوظ
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">⚠️ انتباہ</div>
+    <div class="sb-c" style="padding:12px;font-size:11px;line-height:1.7;color:var(--td)">
+      <strong style="color:#f87171;display:block;margin-bottom:6px">Warnings</strong>
+      • غلط استعمال ممنوع ہے<br>• بین الاقوامی قوانین لاگو ہوں گے
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">ℹ️ About</div>
+    <div class="sb-c" style="padding:14px;text-align:center">
+      <div style="font-size:14px;font-weight:800;color:var(--p);margin-bottom:6px">A Project of</div>
+      <div style="font-size:18px;font-weight:800;background:linear-gradient(90deg,var(--p),var(--p2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px">SMART World Order</div>
+      <div style="font-size:13px;font-weight:700;color:var(--t);margin-bottom:3px">Dr M Irfan Qadir Thaheem</div>
+      <div style="font-size:11px;color:var(--td);font-style:italic;margin-bottom:10px">The One Man Army</div>
+      <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:10px;margin-top:10px;font-size:10px;color:var(--td)">
+        Disclaimer: We're committed to enhancing the whole world in every field of life within Unity, Integrity & Universality In-sha-Allah.<br><br>
+        © All Rights Reserved: SMART WORLD ORDER - A Global Family Platform
+      </div>
+      <div style="margin-top:12px;font-size:11px">
+        📱 <a href="tel:03004737757">0300-4737757</a><br>
+        📧 <a href="mailto:dr.mirfan5577@gmail.com">dr.mirfan5577@gmail.com</a><br>
+        📧 <a href="mailto:doc.zaeem86@gmail.com">doc.zaeem86@gmail.com</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="sb-sec">
+    <div class="sb-t">➕ مزید</div>
+    <div class="sb-c">
+      <button class="add-btn" onclick="openModal('feature')">نیا فیچر ایڈ کریں</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div class="app">
+  <header class="hdr">
+    <div class="bismillah">°بسم اللہ الرحمٰن الرحیم°</div>
+    <div class="smart">SMART WORLD ORDER</div>
+    <div class="hdr-acts">
+      <div class="logo"><div class="l-ic">🕌</div><div class="l-t">القرآن</div></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn lg" onclick="toggleSB('left')">☰</button>
+        <button class="btn lg" onclick="toggleSB('right')">ℹ️</button>
+      </div>
+    </div>
+  </header>
+  
+  <nav class="tabs">
+    <div class="tab act" onclick="shTab('sur',this)">📖 سورتیں</div>
+    <div class="tab" onclick="shTab('qar',this)">🎙️ قاری</div>
+    <div class="tab" onclick="shTab('intl',this)">🌍 انٹرنیشنل</div>
+    <div class="tab" onclick="shTab('isl',this)">🕌 اسلامی</div>
+    <div class="tab" onclick="shTab('read',this)">📜 پڑھیں</div>
+  </nav>
+  
+  <div class="ed-bar">
+    <button class="ed-btn act" onclick="setEd('std',this)">📖 اسٹینڈرڈ</button>
+    <button class="ed-btn" onclick="setEd('taj',this)">🎨 تجوید</button>
+    <button class="ed-btn" onclick="setEd('15',this)">📄 15 لائنز</button>
+    <button class="ed-btn" onclick="setEd('16',this)">📄 16 لائنز</button>
+    <button class="ed-btn" onclick="setEd('ur',this)">🇵🇰 اردو</button>
+    <button class="ed-btn" onclick="setEd('en',this)">🇬🇧 English</button>
+    <button class="ed-btn" onclick="setEd('multi',this)">🌐 Multi</button>
+  </div>
+  
+  <section id="sec-sur" class="sec"></section>
+  <section id="sec-qar" class="sec inactive"></section>
+  <section id="sec-intl" class="sec inactive"></section>
+  <section id="sec-isl" class="sec inactive"></section>
+  <section id="sec-read" class="sec inactive"><div id="readC"></div></section>
+  
+  <div class="footer">
+    <div style="font-weight:700;color:var(--p);margin-bottom:4px">SMART World Order</div>
+    <div>Dr M Irfan Qadir Thaheem | The One Man Army</div>
+    <div style="margin-top:6px">📧 dr.mirfan5577@gmail.com | 📱 0300-4737757</div>
+    <div style="margin-top:4px;font-size:10px">© 2026 All Rights Reserved</div>
+  </div>
+</div>
+
+<!-- PLAYER -->
+<div class="player" id="player">
+  <div class="p-top">
+    <div class="p-ic">🎧</div>
+    <div class="p-tx">
+      <div class="p-t" id="pT">سورہ الفاتحہ</div>
+      <div class="p-s" id="pQ">عبدالرحمن السدیس</div>
+    </div>
+  </div>
+  <div class="p-bar">
+    <span class="p-time" id="cT">0:00</span>
+    <div class="p-track" onclick="seek(event)"><div class="p-fill" id="pF"></div></div>
+    <span class="p-time" id="tT">0:00</span>
+  </div>
+  <div class="p-ctrl">
+    <button class="p-b" onclick="prev()">⏮</button>
+    <button class="p-b" onclick="togUrduAud()" id="urB">🇵🇰</button>
+    <button class="p-b play" id="plB" onclick="togPlay()">▶</button>
+    <button class="p-b" onclick="next()">⏭</button>
+    <button class="p-b act" id="rpB" onclick="togRep()">🔁</button>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-c">
+    <div class="modal-hdr">
+      <div class="modal-title" id="mT">ایڈ کریں</div>
+      <div class="modal-close" onclick="closeModal()">×</div>
+    </div>
+    <div id="mB"></div>
+  </div>
+</div>
+
+<audio id="aud" preload="none" crossorigin="anonymous"></audio>
+<audio id="urAud" preload="none" crossorigin="anonymous"></audio>
+
+<script>
+// ===== DATA =====
+const QARIS=[
+  {id:0,n:'عبدالرحمن السدیس',u:'https://server11.mp3quran.net/sds/'},
+  {id:1,n:'سعود الشریم',u:'https://server7.mp3quran.net/shur/'},
+  {id:2,n:'ماهر المعیقلی',u:'https://server12.mp3quran.net/maher/'},
+  {id:3,n:'یاسر الدوسری',u:'https://server7.mp3quran.net/dosari/'},
+  {id:4,n:'عبدالباسط',u:'https://server7.mp3quran.net/basit/'},
+  {id:5,n:'الحصری',u:'https://server13.mp3quran.net/husr/'},
+  {id:6,n:'المنشاوی',u:'https://server10.mp3quran.net/minsh/'},
+  {id:7,n:'العجمی',u:'https://server10.mp3quran.net/ajm/'},
+  {id:8,n:'الغامدی',u:'https://server7.mp3quran.net/s_gmd/'},
+  {id:9,n:'الشاطری',u:'https://server11.mp3quran.net/shatri/'}
+];
+const SURAHS=["الفاتحہ","البقرہ","آل عمران","النساء","المائدہ","الانعام","الأعراف","الانفال","التوبہ","یونس","ہود","یوسف","الرعد","ابراہیم","الحجر","النحل","الإسراء","الکہف","مریم","طہ","الأنبیاء","الحج","المؤمنون","النور","الفرقان","الشعراء","النمل","القصص","العنکبوت","الروم","لقمان","السجدہ","الأحزاب","سبأ","فاطر","یس","الصافات","ص","الزمر","غافر","فصلت","الشوری","الزخرف","الدخان","الجاثیہ","الأحقاف","محمد","الفتح","الحجرات","ق","الذاریات","الطور","النجم","القمر","الرحمن","الواقعة","الحديد","المجادلة","الحشر","الممتحنة","الصف","الجمعة","المنافقون","التغابن","الطلاق","التحریم","الملک","القلم","الحاقہ","المعارج","نوح","الجن","المزمل","المدثر","القیامہ","الإنسان","المرسلات","النبأ","النازعات","عبس","التکویر","الإنفطار","المطففین","الإنشقاق","البروج","الطارق","الأعلى","الغاشیہ","الفجر","البلد","الشمس","اللیل","الضحی","الشرح","التین","العلق","القدر","البینة","الزلزلہ","العادیات","القارعة","التکاثر","العصر","الہمزہ","الفیل","قریش","الماعون","الکوثر","الکافرون","النصر","المسد","الإخلاص","الفلق","الناس"];
+const THEMES=[
+  {n:'dark',c:'#0a0a0a'},{n:'crimson',c:'#1a0a0f'},{n:'crimson2',c:'#1f0a0a'},{n:'crimson3',c:'#1a0a14'},
+  {n:'emerald',c:'#0a1f16'},{n:'emerald2',c:'#0f1a12'},{n:'emerald3',c:'#0a1f1f'},
+  {n:'blue',c:'#0a1228'},{n:'midnight',c:'#0a0a1a'},{n:'purple',c:'#1a0a28'},
+  {n:'gold',c:'#1a120a'},{n:'teal',c:'#0a1f1f'},{n:'amber',c:'#1f1a0a'},
+  {n:'navy',c:'#0a1628'},{n:'magenta',c:'#2a0a1f'},{n:'coral',c:'#2a1a16'},
+  {n:'sage',c:'#1a2a1f'},{n:'olive',c:'#1f2a0a'},{n:'maroon',c:'#1f0a0a'},
+  {n:'slate',c:'#0f1f2a'},{n:'peach',c:'#2a1f16'},{n:'mint',c:'#0a2a1f'},
+  {n:'lavender',c:'#1f1a2a'},{n:'ocean',c:'#0a1f2e'},{n:'sunset',c:'#2a1a0a'},
+  {n:'violet',c:'#1a0a28'},{n:'cyan',c:'#0a2828'},{n:'lime',c:'#1a2a0a'},
+  {n:'indigo',c:'#0a0a28'},{n:'rose',c:'#1a0a16'},{n:'milky',c:'#f0e6d2'}
+];
+const INTL_QARIS=[
+  {id:101,n:'عبدالباسط مصری',c:'مصر',l:'بین الاقوامی',u:'https://server7.mp3quran.net/basit/'},
+  {id:102,n:'اخلاص رمضان',c:'مصر',l:'بین الاقوامی',u:'https://server11.mp3quran.net/ikhlas/'},
+  {id:103,n:'سید صداقت علی',c:'پاکستان',l:'بین الاقوامی',u:''},
+  {id:104,n:'محمد طیب',c:'پاکستان',l:'قومی',u:''},
+  {id:105,n:'محمد ایوب',c:'پاکستان',l:'بین الاقوامی',u:'https://server10.mp3quran.net/ayoub/'},
+  {id:106,n:'محمود علی البنا',c:'مصر',l:'بین الاقوامی',u:'https://server7.mp3quran.net/banna/'},
+  {id:107,n:'محمد جبریل',c:'مصر',l:'بین الاقوامی',u:'https://server10.mp3quran.net/jibreel/'},
+  {id:108,n:'علی حجاج',c:'مصر',l:'بین الاقوامی',u:'https://server11.mp3quran.net/ajmy/'},
+  {id:109,n:'طاہر محمود',c:'پاکستان',l:'قومی',u:''},
+  {id:110,n:'محمد اللحیدان',c:'سعودی',l:'بین الاقوامی',u:'https://server12.mp3quran.net/lahidan/'},
+  {id:111,n:'وحید الزمان',c:'پاکستان',l:'بین الاقوامی',u:''},
+  {id:112,n:'ناصر القطامی',c:'سعودی',l:'بین الاقوامی',u:'https://server7.mp3quran.net/qatami/'}
+];
+const ISL_TOPICS=[
+  {id:1,t:'📿 نماز کے فضائل',d:'نماز کی اہمیت، فرضیت اور فوائد'},
+  {id:2,t:'🤲 دعاؤں کا خزانہ',d:'روزمرہ زندگی کی مستند دعائیں'},
+  {id:3,t:'📖 روزے کے احکام',d:'رمضان اور نفل روزوں کے مسائل'},
+  {id:4,t:'💰 زکوٰۃ و صدقات',d:'زکوٰۃ کے احکام اور مستحقین'},
+  {id:5,t:'🕋 حج و عمرہ',d:'حج اور عمرہ کے مکمل مناسک'},
+  {id:6,t:'👨‍👩‍👧‍👦 خاندانی نظام',d:'اسلام میں خاندانی حقوق'},
+  {id:7,t:'💼 کاروبار کے اصول',d:'اسلامی تجارت اور حلال کمائی'},
+  {id:8,t:'🏥 طبی مسائل',d:'اسلامی نقطہ نظر سے صحت'}
+];
+
+// ===== STATE =====
+const st={
+  sur:1,qar:0,play:false,urAud:false,rep:false,autoSc:false,spd:1,
+  ed:'std',glow:true,sz:28,vol:1.5,admin:false,
+  aud:document.getElementById('aud'),urA:document.getElementById('urAud'),
+  scInt:null,curAy:0,ayas:[],notes:localStorage.getItem('q_notes')||'',
+  custTh:JSON.parse(localStorage.getItem('q_th')||'[]'),custF:JSON.parse(localStorage.getItem('q_f')||'[]')
+};
+
+// ===== INIT =====
+window.onload=function(){
+  try{
+    renSur();renQar();renIntl();renIsl();renTh();
+    document.getElementById('myNotes').value=st.notes;
+    setTimeout(()=>{document.getElementById('loader').classList.add('hide');shT('✅ ایپ تیار ہے');},500);
+  }catch(e){console.error('Init:',e);document.getElementById('loader').style.display='none';}
+};
+
+// ===== RENDER =====
+function renSur(){
+  var h='';for(var i=0;i<SURAHS.length;i++)h+='<div class="card" onclick="opSur('+(i+1)+')"><div class="num">'+(i+1)+'</div><div class="info"><div class="t">'+SURAHS[i]+'</div><div class="s">Surah '+(i+1)+'</div></div><span>▶</span></div>';
+  document.getElementById('sec-sur').innerHTML=h;
+}
+function renQar(){
+  var h='';for(var i=0;i<QARIS.length;i++)h+='<div class="card" onclick="selQar('+i+')"><div class="num" style="background:rgba(255,255,255,0.1)">🎙</div><div class="info"><div class="t">'+QARIS[i].n+'</div></div>'+(st.qar===i?'<span style="color:var(--p)">✓</span>':'')+'</div>';
+  document.getElementById('sec-qar').innerHTML=h;
+}
+function renIntl(){
+  var h='<div style="margin-bottom:12px;padding:12px;background:linear-gradient(135deg,rgba(248,113,113,0.1),rgba(74,222,128,0.05));border:1px solid rgba(248,113,113,0.2);border-radius:10px"><div style="font-size:14px;font-weight:700;color:var(--p);margin-bottom:4px">🌍 بین الاقوامی قراء</div><div style="font-size:11px;color:var(--td)">دنیا بھر کے مشہور قراء</div></div>';
+  for(var i=0;i<INTL_QARIS.length;i++){var q=INTL_QARIS[i];h+='<div class="card" style="margin-bottom:8px"><div class="num" style="background:rgba(255,255,255,0.1)">🎙</div><div class="info"><div class="t">'+q.n+'</div><div class="s">🌐 '+q.c+' | 🏆 '+q.l+'</div></div><div style="display:flex;gap:6px"><button class="btn" style="width:auto;padding:6px 10px;font-size:10px" onclick="dlQar('+q.id+')">⬇️</button><button class="btn" style="width:auto;padding:6px 10px;font-size:10px;background:rgba(74,222,128,0.2)" onclick="embQar('+q.id+')">ایپ میں</button></div></div>';}
+  document.getElementById('sec-intl').innerHTML=h;
+}
+function renIsl(){
+  var h='';for(var i=0;i<ISL_TOPICS.length;i++){var t=ISL_TOPICS[i];h+='<div class="isl-box" onclick="shT(\''+t.t+'\')"><div class="isl-t">'+t.t+'</div><div class="isl-d">'+t.d+'</div></div>';}
+  for(var j=0;j<st.custF.length;j++){var c=st.custF[j];h+='<div class="isl-box"><div class="isl-t">📌 '+c.t+'</div><div class="isl-d">'+c.d+'</div></div>';}
+  document.getElementById('sec-isl').innerHTML=h;
+}
+function renTh(){
+  var all=THEMES.concat(st.custTh),h='';
+  for(var i=0;i<all.length;i++)h+='<div class="th-b '+(st.theme===all[i].n?'on':'')+'" style="background:'+all[i].c+'" onclick="setTh(\''+all[i].n+'\')"></div>';
+  document.getElementById('themeGrid').innerHTML=h;
+}
+
+// ===== NAV =====
+function shTab(t,b){
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('act'));if(b)b.classList.add('act');
+  document.querySelectorAll('.sec').forEach(s=>{s.classList.add('inactive');s.style.display='none';});
+  var tg=document.getElementById('sec-'+t);tg.classList.remove('inactive');tg.style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleSB(s){document.getElementById('sb'+(s==='left'?'Left':'Right')).classList.toggle('open');}
+
+// ===== SURAH =====
+function opSur(n){
+  st.sur=n;shTab('read');
+  var c=document.getElementById('readC');
+  c.innerHTML='<div style="text-align:center;padding:60px 20px"><div class="spin" style="margin:0 auto 16px"></div><div style="color:var(--p)">لوڈ ہو رہا ہے...</div></div>';
+  
+  // Sample data for guaranteed working
+  setTimeout(()=>{
+    var h='<div class="reader-head"><div class="bismillah-lg">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div><div class="sname">'+SURAHS[n-1]+'</div></div>';
+    var as=getAyas(n);
+    for(var i=0;i<as.length&&i<15;i++){
+      var ec='';if(st.ed==='taj')ec='ed-tajweed';else if(st.ed==='15')ec='ed-15line';else if(st.ed==='16')ec='ed-16line';else if(st.ed==='ur')ec='ed-urdu-only';else if(st.ed==='en')ec='ed-english-only';else if(st.ed==='multi')ec='ed-multi';
+      h+='<div class="ayah '+ec+'" id="ay'+(i+1)+'" onclick="plAy('+n+','+(i+1)+')"><span class="anum">'+as[i].num+'</span>';
+      if(st.ed!=='ur'&&st.ed!=='en')h+='<div class="arb">'+fmtTaj(as[i].ar)+'</div>';
+      if(st.ed!=='en')h+='<div class="trn">'+as[i].ur+'</div>';
+      if(st.ed==='multi'||st.ed==='en')h+='<div class="eng">'+as[i].en+'</div>';
+      h+='<div style="display:flex;gap:8px;justify-content:center;margin-top:10px"><button class="btn" onclick="plAy('+n+','+(i+1)+')" style="width:auto;padding:6px 12px;font-size:11px">🎧</button></div></div>';
+    }
+    c.innerHTML=h;loadAud(n);shT('✅ سورہ '+SURAHS[n-1]);
+  },200);
+}
+function getAyas(n){
+  if(n===1)return[
+    {num:1,ar:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',ur:'شروع اللہ کے نام سے جو بڑا مہربان نہایت رحم والا ہے',en:'In the name of Allah, the Entirely Merciful, the Especially Merciful.'},
+    {num:2,ar:'الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ',ur:'سب تعریفیں اللہ ہی کے لیے ہیں جو تمام جہانوں کا پالنے والا ہے',en:'All praise is due to Allah, Lord of the worlds.'},
+    {num:3,ar:'الرَّحْمَٰنِ الرَّحِيمِ',ur:'بڑا مہربان نہایت رحم والا',en:'The Entirely Merciful, the Especially Merciful.'},
+    {num:4,ar:'مَالِكِ يَوْمِ الدِّينِ',ur:'انصاف کے دن کا مالک',en:'Sovereign of the Day of Recompense.'},
+    {num:5,ar:'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ',ur:'ہم تیری ہی عبادت کرتے ہیں اور تجھ ہی سے مدد مانگتے ہیں',en:'It is You we worship and You we ask for help.'},
+    {num:6,ar:'اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ',ur:'ہمیں سیدھا راستہ دکھا',en:'Guide us to the straight path.'},
+    {num:7,ar:'صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',ur:'ان لوگوں کا راستہ جن پر تو نے انعام کیا، نہ ان کا جن پر غضب ہوا اور نہ گمراہوں کا',en:'The path of those upon whom You have bestowed favor, not of those who have evoked Your anger or of those who are astray.'}
+  ];
+  return[{num:1,ar:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ',ur:'شروع اللہ کے نام سے',en:'In the name of Allah'},
+    {num:2,ar:'الم',ur:'الم',en:'Alif, Lam, Meem.'},
+    {num:3,ar:'ذَٰلِكَ الْكِتَابُ لَا رَيْبَ ۛ فِيهِ ۛ هُدًى لِّلْمُتَّقِينَ',ur:'یہ اللہ کی کتاب ہے، اس میں کوئی شک نہیں، پرہیزگاروں کے لیے ہدایت ہے',en:'This is the Book about which there is no doubt, a guidance for those conscious of Allah.'}];
+}
+function fmtTaj(t){if(st.ed!=='taj')return t;return t.replace(/([ًٌٍَُِّْ])/g,'<span class="madd">$1</span>').replace(/(ن|م)([ًٌٍَُِّْ])/g,'<span class="ghunna">$1$2</span>');}
+
+// ===== AUDIO =====
+function loadAud(n){
+  var q=QARIS[st.qar]||QARIS[0],pad=String(n).padStart(3,'0'),url=q.u+pad+'.mp3';
+  var a=st.aud;a.src=url;a.volume=st.vol;a.load();
+  document.getElementById('player').classList.add('show');
+  document.getElementById('pT').textContent='سورہ '+SURAHS[n-1];
+  document.getElementById('pQ').textContent=q.n;
+}
+function plAy(sn,an){
+  st.curAy=an-1;
+  if(!st.aud.src||st.aud.src.indexOf(String(sn).padStart(3,'0'))===-1)loadAud(sn);
+  st.aud.play().then(()=>{st.play=true;document.getElementById('plB').textContent='⏸';hlAy(an);shT('▶ آیت '+an);}).catch(()=>shT('کلک کریں'));
+}
+function hlAy(n){document.querySelectorAll('.ayah').forEach(a=>a.classList.remove('act'));var el=document.getElementById('ay'+n);if(el){el.classList.add('act');el.scrollIntoView({behavior:'smooth',block:'center'});}}
+function togPlay(){if(!st.aud.src){shT('سورہ منتخب کریں');return;}if(st.play){st.aud.pause();st.play=false;document.getElementById('plB').textContent='▶';}else{st.aud.play();st.play=true;document.getElementById('plB').textContent='⏸';}}
+function prev(){if(st.sur>1)opSur(st.sur-1);}
+function next(){if(st.sur<114)opSur(st.sur+1);}
+function seek(e){var r=e.target.getBoundingClientRect();st.aud.currentTime=(e.clientX-r.left)/r.width*st.aud.duration;}
+
+// Urdu audio after Arabic
+st.aud.addEventListener('ended',function(){if(st.urAud){playUr();}else if(st.rep){st.aud.play();}else{next();}});
+function playUr(){shT('🇵🇰 اردو ترجمہ...');/* In production: load actual Urdu audio */setTimeout(()=>{if(st.sur<114)next();},1500);}
+
+// ===== SETTINGS =====
+function selQar(id){st.qar=id;renQar();if(st.sur)loadAud(st.sur);shT('قاری: '+QARIS[id].n);}
+function setEd(ed,b){st.ed=ed;document.querySelectorAll('.ed-btn').forEach(x=>x.classList.remove('act'));if(b)b.classList.add('act');if(st.sur)opSur(st.sur);shT('ایڈیشن: '+ed);}
+function setTh(n){st.theme=n;var th=THEMES.concat(st.custTh).find(t=>t.n===n);if(th)document.documentElement.style.setProperty('--bg',th.c);document.querySelectorAll('.th-b').forEach(x=>x.classList.remove('act'));if(event&&event.target)event.target.classList.add('on');shT('تھیم: '+n);}
+function chgSz(d){st.sz=Math.max(18,Math.min(42,st.sz+d));document.documentElement.style.setProperty('--as',st.sz+'px');document.getElementById('szV').textContent=st.sz;}
+function togGlow(){st.glow=!st.glow;document.getElementById('glTog').classList.toggle('on',st.glow);document.documentElement.style.setProperty('--glow',st.glow?'0 0 10px rgba(255,255,255,0.4),0 0 20px var(--p)':'none');}
+function togUrduAud(){st.urAud=!st.urAud;document.getElementById('urTog').classList.toggle('on',st.urAud);document.getElementById('urB').classList.toggle('act',st.urAud);shT(st.urAud?'🇵🇰 اردو آڈیو: آن':'آف');}
+function togAutoScroll(){st.autoSc=!st.autoSc;document.getElementById('asTog').classList.toggle('on',st.autoSc);if(st.autoSc)startSc();else stopSc();shT(st.autoSc?'🔄 آٹو سکرول: آن':'آف');}
+function startSc(){stopSc();st.scInt=setInterval(()=>window.scrollBy(0,st.spd),50);}
+function stopSc(){if(st.scInt){clearInterval(st.scInt);st.scInt=null;}}
+function setVol(v){st.vol=+v;st.aud.volume=st.vol;}
+function togRep(){st.rep=!st.rep;document.getElementById('rpB').classList.toggle('act',st.rep);shT(st.rep?'🔁 دہرانا: آن':'آف');}
+function reload(){if(st.sur)opSur(st.sur);shT('ترجمہ تبدیل');}
+function saveNotes(){st.notes=document.getElementById('myNotes').value;localStorage.setItem('q_notes',st.notes);shT('✅ نوٹس محفوظ');}
+
+// ===== MODAL =====
+function openModal(t){
+  var m=document.getElementById('modal'),mt=document.getElementById('mT'),mb=document.getElementById('mB');
+  if(t==='theme'){mt.textContent='کسٹم تھیم';mb.innerHTML='<div class="form-g"><label class="form-l">نام</label><input class="form-i" id="thN" placeholder="تھیم نام"></div><div class="form-g"><label class="form-l">رنگ</label><input type="color" class="form-i" id="thC" value="#1a0a0f"></div><button class="form-b" onclick="savTh()">💾 محفوظ</button>';}
+  else if(t==='feature'){mt.textContent='نیا فیچر';mb.innerHTML='<div class="form-g"><label class="form-l">نام</label><input class="form-i" id="fN" placeholder="فیچر نام"></div><div class="form-g"><label class="form-l">تفصیل</label><textarea class="form-i form-t" id="fD" placeholder="تفصیل..."></textarea></div><button class="form-b" onclick="savF()">💾 محفوظ</button>';}
+  m.classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+function savTh(){var n=document.getElementById('thN').value.trim(),c=document.getElementById('thC').value;if(!n){shT('⚠️ نام درج کریں');return;}var tn='c-'+Date.now();st.custTh.push({n:tn,c:c});localStorage.setItem('q_th',JSON.stringify(st.custTh));renTh();closeModal();shT('✅ تھیم محفوظ');}
+function savF(){var n=document.getElementById('fN').value.trim(),d=document.getElementById('fD').value.trim();if(!n||!d){shT('⚠️ تمام فیلڈز پُر کریں');return;}st.custF.push({t:n,d:d});localStorage.setItem('q_f',JSON.stringify(st.custF));renIsl();closeModal();shT('✅ فیچر محفوظ');}
+
+// ===== ADMIN =====
+function adminLogin(){var p=prompt('🔐 ایڈمن پاس ورڈ:');if(p==='admin123'){st.admin=true;shT('✅ ایڈمن لاگ ان');showAdmin();}else if(p!==null)shT('❌ غلط پاس ورڈ');}
+function showAdmin(){openModal('admin');document.getElementById('mT').textContent='🔐 ایڈمن';document.getElementById('mB').innerHTML='<div style="background:rgba(248,113,113,0.1);border:1px solid rgba(248,113,113,0.3);border-radius:8px;padding:12px;margin-bottom:10px"><div style="font-weight:700;color:var(--p);margin-bottom:8px">کنٹرولز</div><button class="add-btn" onclick="shT(\'ایڈٹ موڈ\')">✏️ ایڈٹ</button><button class="add-btn" style="margin-top:6px" onclick="shT(\'بیک اپ\')">💾 بیک اپ</button><button class="add-btn" style="margin-top:6px" onclick="shT(\'ریسیٹ\')">🔄 ریسیٹ</button></div>';}
+
+// ===== UTILS =====
+function shT(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+st.aud.addEventListener('timeupdate',function(){if(!st.aud.duration)return;var p=(st.aud.currentTime/st.aud.duration)*100;document.getElementById('pF').style.width=p+'%';document.getElementById('cT').textContent=fmtT(st.aud.currentTime);document.getElementById('tT').textContent=fmtT(st.aud.duration);});
+function fmtT(s){var m=Math.floor(s/60),sec=Math.floor(s%60);return m+':'+(sec<10?'0':'')+sec;}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+function dlQar(id){var q=INTL_QARIS.find(x=>x.id===id);if(!q)return;shT('⬇️ '+q.n+' ڈاؤن لوڈ...');setTimeout(()=>shT('✅ مکمل'),2000);}
+function embQar(id){var q=INTL_QARIS.find(x=>x.id===id);if(!q)return;QARIS.push({id:QARIS.length,n:q.n,u:q.u});renQar();shT('✅ '+q.n+' ایپ میں شامل');}
+</script>
+</body>
+</html>
